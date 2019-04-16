@@ -90,6 +90,77 @@
           void nextpoint(int direction)
           {
           switch (direction)
+          {
+          case UP:ci--; break;
+          case DOWN:ci++; break;
+          case LEFT:cj--; break;
+          case RIGHT:cj++
+          }
+          }
+          
+          int ifgameover(void)
+          {
+          if(ci < 0 || ci >=MAX || cj < 0 || cj >= MAX)return 1;
+          if(lifetime[ci][cj] !=0)return 1;
+          return 0;
+          }
+          
+          int finddirection(void)
+          {
+          
+          if (_kbhit())
+          {
+          int input = _getch();
+          if (input == 0xe0)
+          {
+          return direction=_getch();
+          }
+          else if (input == 27)
+          {
+          exit(0);
+          }
+          }
+          return direction;
+          }
+          
+          
+          int main(void)
+          {
+          system("title 贪吃蛇 by zora wu")
+          system("mode con cols=65 lines=34");
+          
+          initialiaztion();
+          crealuckyapple();
+          display();
+          while(1)
+          {
+          system("cls");
+          findirection();
+          nextpoint(direction);
+          
+          if (ifgameover())
+          {
+          system("cls");
+          printf("Gameover!\n");
+          system("pause");
+          break;
+          }
+          if (luckytable[ci][cj] == 1)
+          {
+          lifetime[ci][cj] += addlength++; creatluckapple();
+          }
+          else
+          {
+          lesslifetime();
+          lifetime[ci][cj] += addlength;
+          
+          }
+          display();
+          Sleep(500);
+          }
+          }
+          
+        
           
           
           
